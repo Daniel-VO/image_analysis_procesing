@@ -37,7 +37,7 @@ def fft(imgfile):
 	R=numpy.fft.rfftfreq(2*S.size,d=1/(2*max(S)))[1:]
 	G=2/numpy.pi*fftpack.dst(S*(I-1))
 
-	plt.clf()
+	plt.close('all')
 	plt.imshow(numpy.log(abs(fft)),cmap='coolwarm')
 	plt.savefig(filename+'_fft.png')
 
@@ -58,7 +58,7 @@ for imgfile in imgfiles:
 	elif 'Zyklus_5' in filename:
 		G_Zyklus_5=numpy.append(G_Zyklus_5,G)
 
-	plt.clf()
+	plt.close('all')
 	plt.plot(S,I)
 	plt.yscale('log')
 	plt.xlabel('S/pixels^-1')
@@ -66,7 +66,7 @@ for imgfile in imgfiles:
 	plt.savefig(filename+'_S-I.png')
 	numpy.savetxt(filename+'_S-I.dat',numpy.array([S,I]).transpose())
 
-	plt.clf()
+	plt.close('all')
 	plt.plot(R,G)
 	plt.yscale('log')
 	plt.xlabel('R/pixels')
@@ -80,7 +80,7 @@ G_Zyklus_5=numpy.average(G_Zyklus_5.reshape(-1,len(R)),axis=0)
 Rdiff,Gdiff=[R,G_Zyklus_5/G_Zyklus_0-1]
 numpy.savetxt('diff.dat',numpy.array([Rdiff,Gdiff]).transpose())
 
-plt.clf()
+plt.close('all')
 plt.plot(Rdiff,Gdiff)
 plt.xlabel('R/pixels')
 plt.ylabel('G/G/1')
