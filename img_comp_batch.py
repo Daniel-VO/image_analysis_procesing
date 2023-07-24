@@ -39,8 +39,8 @@ def func(i):
 	size=str(subprocess.check_output('identify -format "%wx%h" "'+i+'"',shell=True)).split('x')
 	width,height=int(numbers.findall(size[0])[0]),int(numbers.findall(size[1])[0])
 	if width>target and width<=height:
-		os.system('convert "'+i+'" -resize '+str(target)+'x'+str(int(height*width/target))+'\> '+operator+' "'+i+'"')
+		os.system('convert -quiet "'+i+'" -resize '+str(target)+'x'+str(int(height*width/target))+'\> '+operator+' "'+i+'"')
 	if height>target and height<=width:
-		os.system('convert "'+i+'" -resize '+str(int(height*width/target))+'x'+str(target)+'\> '+operator+' "'+i+'"')
+		os.system('convert -quiet "'+i+'" -resize '+str(int(height*width/target))+'x'+str(target)+'\> '+operator+' "'+i+'"')
 
 ray.get([func.remote(i) for i in files])
