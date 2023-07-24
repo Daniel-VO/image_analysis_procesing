@@ -1,5 +1,5 @@
 """
-Created 11. November 2022 by Daniel Van Opdenbosch, Technical University of Munich
+Created 24. Juli 2023 by Daniel Van Opdenbosch, Technical University of Munich
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. It is distributed without any warranty or implied warranty of merchantability or fitness for a particular purpose. See the GNU general public license for more details: <http://www.gnu.org/licenses/>
 """
@@ -38,9 +38,9 @@ def func(i):
 		operator='-auto-level'
 	size=str(subprocess.check_output('identify -format "%wx%h" "'+i+'"',shell=True)).split('x')
 	width,height=int(numbers.findall(size[0])[0]),int(numbers.findall(size[1])[0])
-	if width>target and width>=height:
+	if width>target and width<=height:
 		os.system('convert "'+i+'" -resize '+str(target)+'x'+str(int(height*width/target))+'\> '+operator+' "'+i+'"')
-	if height>target and height>=width:
+	if height>target and height<=width:
 		os.system('convert "'+i+'" -resize '+str(int(height*width/target))+'x'+str(target)+'\> '+operator+' "'+i+'"')
 
 ray.get([func.remote(i) for i in files])
